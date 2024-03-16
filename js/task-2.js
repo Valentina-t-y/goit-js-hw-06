@@ -1,17 +1,29 @@
-function makeArray(firstArray, secondArray, maxLength) {
-    const allArray = firstArray.concat(secondArray);
-    if (allArray.length > maxLength) {
-        return allArray.slice(0, maxLength);
-    } else {
-        return allArray;
+class Storage {
+    #items;
+    constructor(items) {
+        this.#items = items;
+    }
+
+    getItems() {
+        return this.#items;
+    }
+
+    addItem(newItem) {
+        return this.#items.push(newItem);
+    }
+
+    removeItem(itemToRemove) {
+        const index = this.#items.indexOf(itemToRemove);
+        return this.#items.splice(index, 1);
+        
     }
 }
 
 
+const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+storage.addItem("Droid");
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+storage.removeItem("Prolonger");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
 
-console.log(makeArray(["Mango", "Poly"], ["Ajax", "Chelsea"], 3)); // ["Mango", "Poly", "Ajax"]
-console.log(makeArray(["Mango", "Poly", "Houston"], ["Ajax", "Chelsea"], 4)); // ["Mango", "Poly", "Houston", "Ajax"]
-console.log(makeArray(["Mango"], ["Ajax", "Chelsea", "Poly", "Houston"], 3)); // ["Mango", "Ajax", "Chelsea"]
-console.log(makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus"], 2)); // ["Earth", "Jupiter"]
-console.log(makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus"], 4)); // ["Earth", "Jupiter", "Neptune", "Uranus"]
-console.log(makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus", "Venus"], 0)); // []
