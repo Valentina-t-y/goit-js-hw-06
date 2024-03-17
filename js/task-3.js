@@ -10,16 +10,18 @@ class StringBuilder {
    }
 
    padEnd(str) {
-      return  this.getValue() + str;
+     this.#value += str;
      
    }
 
    padStart(str) {
-      return str + this.padEnd(str);
+    this.#value = str + this.#value;
    }
 
    padBoth(str) {
-      return str + this.padStart(str) + str;
+      this.padStart(str);
+      this.padEnd(str);
+
    }
 
 }
